@@ -11,9 +11,11 @@ public class NameChecker {
      * @return True if input is a valid name, else false
      */
     public static boolean check(String input) {
+        //btwn 2 and 40 chars
         if(input == null || input.length()  < 2 || input.length() > 40){
             return false;
         }
+        //cannot start with hyphen or single quote
         if (input.startsWith("-") || input.startsWith("'")) {
             return false;
         }
@@ -22,9 +24,13 @@ public class NameChecker {
             char ch = input.charAt(i);
             if (Character.isAlphabetic(ch)) {
                 lastWasHyphen = false;
-            } else if ((ch == '-' || ch == '\'') && (lastWasHyphen || i == input.length() - 1)) {
+            }
+            //if character is a hyphen or quote and the last character was a hyphen or quote then return false
+            else if ((ch == '-' || ch == '\'') && lastWasHyphen) {
                 return false;
-            } else if (ch != '-' && ch != '\'') {
+            }
+            //if char is smth else entirely
+            else if (ch != '-' && ch != '\'') {
                 return false;
             } else {
                 lastWasHyphen = (ch == '-');
