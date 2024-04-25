@@ -11,8 +11,25 @@ public class NameChecker {
      * @return True if input is a valid name, else false
      */
     public static boolean check(String input) {
-        // TODO: implement
-
-        return false;
+        if(input == null || input.length()  < 2 || input.length() > 40){
+            return false;
+        }
+        if (input.startsWith("-") || input.startsWith("'")) {
+            return false;
+        }
+        boolean lastWasHyphen = false;
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (Character.isAlphabetic(ch)) {
+                lastWasHyphen = false;
+            } else if ((ch == '-' || ch == '\'') && (lastWasHyphen || i == input.length() - 1)) {
+                return false;
+            } else if (ch != '-' && ch != '\'') {
+                return false;
+            } else {
+                lastWasHyphen = (ch == '-');
+            }
+        }
+        return true;
     }
 }
