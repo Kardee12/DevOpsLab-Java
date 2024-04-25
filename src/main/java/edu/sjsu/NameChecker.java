@@ -17,6 +17,19 @@ public class NameChecker {
         if (input.startsWith("-") || input.startsWith("'")) {
             return false;
         }
-        return input.matches("[A-Za-z]([A-Za-z'\\-]*[A-Za-z'])?");
+        boolean lastWasHyphen = false;
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            if (Character.isAlphabetic(ch)) {
+                lastWasHyphen = false;
+            } else if ((ch == '-' || ch == '\'') && (lastWasHyphen || i == input.length() - 1)) {
+                return false;
+            } else if (ch != '-' && ch != '\'') {
+                return false;
+            } else {
+                lastWasHyphen = (ch == '-');
+            }
+        }
+        return true;
     }
 }
