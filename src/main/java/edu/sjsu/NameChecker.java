@@ -20,8 +20,10 @@ public class NameChecker {
             return false;
         }
         boolean lastWasHyphen = false;
+        int singleQuote = 0;
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
+            if ch == '\'' singleQuote++;
             if (Character.isAlphabetic(ch)) {
                 lastWasHyphen = false;
             }
@@ -32,7 +34,11 @@ public class NameChecker {
             //if char is smth else entirely
             else if (ch != '-' && ch != '\'') {
                 return false;
-            } else {
+            }
+            else if (singleQuote >= 2){
+                return false;
+            }
+            else {
                 lastWasHyphen = (ch == '-');
             }
         }
