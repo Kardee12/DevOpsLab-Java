@@ -23,7 +23,7 @@ public class NameChecker {
         int singleQuote = 0;
         for (int i = 0; i < input.length(); i++) {
             char ch = input.charAt(i);
-            if ch == '\'' singleQuote++;
+            if (ch == '\'') singleQuote++;
             if (Character.isAlphabetic(ch)) {
                 lastWasHyphen = false;
             }
